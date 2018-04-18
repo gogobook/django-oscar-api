@@ -4,7 +4,7 @@ from oscar import OSCAR_MAIN_TEMPLATE_DIR
 
 ALLOWED_HOSTS = []
 
-BASE_DIR = os.path.dirname(__file__)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 OSCARAPI_BLOCK_ADMIN_API_ACCESS = False
 
@@ -106,17 +106,28 @@ LOGGING = {
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
+
+MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'oscarapi.middleware.HeaderSessionMiddleware',
+
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'oscar.apps.basket.middleware.BasketMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-)
 
+    # Allow languages to be selected
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.http.ConditionalGetMiddleware',
+    'django.middleware.common.CommonMiddleware',
+
+    # Ensure a valid basket is added to the request instance for every request
+    'oscar.apps.basket.middleware.BasketMiddleware',
+]
 REST_FRAMEWORK = {
     'CHARSET': 'utf-8',
     'DEFAULT_RENDERER_CLASSES': (
@@ -125,7 +136,7 @@ REST_FRAMEWORK = {
     )
 }
 
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = 'sandbox.urls'
 
 SECRET_KEY = 'li0$-gnv)76g$yf7p@(cg-^_q7j6df5cx$o-gsef5hd68phj!4'
 

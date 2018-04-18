@@ -14,8 +14,7 @@ sandbox: install
 	python sandbox/manage.py loaddata product productcategory productattribute productclass productattributevalue category attributeoptiongroup attributeoption stockrecord partner voucher country
 
 test: 
-	python sandbox/manage.py test oscarapi
-
+	python manage.py test oscarapi
 coverage:
 	coverage run sandbox/manage.py test oscarapi
 	coverage report -m

@@ -13,6 +13,8 @@ include/
 lib/
 *.egg-info/
 *.pyc
+*.log
+.vscode/
 version-django-oscar-commerce-connect.txt
 sandbox/media/
 sandbox/static/

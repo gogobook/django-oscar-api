@@ -2,11 +2,11 @@ import json
 from re import match
 
 from django.conf import settings
-from django.core.urlresolvers import reverse
 from django.contrib.auth import get_user_model
-from django.core.urlresolvers import reverse, NoReverseMatch
+from django.urls import reverse, NoReverseMatch
 from django.http import SimpleCookie
 from django.test import TestCase
+# , Client
 
 
 User = get_user_model()
@@ -14,7 +14,9 @@ User = get_user_model()
 
 class APITest(TestCase):
     longMessage = True
-
+    # def __init__(self):
+    #     self.client = Client()
+    
     def setUp(self):
         user = User.objects.create_user(
             username='admin',

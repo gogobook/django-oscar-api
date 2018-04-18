@@ -4,7 +4,7 @@ import re
 from django.conf import settings
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http.response import HttpResponse
 from django.utils.translation import ugettext as _
 
@@ -230,7 +230,7 @@ class ApiBasketMiddleWare(BasketMiddleware, IsApiRequest):
             for cookie_key in cookies_to_delete:
                 response.delete_cookie(cookie_key)
 
-            if not request.user.is_authenticated():
+            if not request.user.is_authenticated:
                 response.set_cookie(
                     cookie_key, cookie,
                     max_age=settings.OSCAR_BASKET_COOKIE_LIFETIME,

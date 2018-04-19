@@ -19,7 +19,7 @@ class OfferTest(APITest):
 
     def setUp(self):
         # make sure we have this disabled for most of the tests
-        settings.OSCAR_MAX_BASKET_QUANTITY_THRESHOLD = None
+        # settings.OSCAR_MAX_BASKET_QUANTITY_THRESHOLD = None
         super(OfferTest, self).setUp()
 
     def test_basket_discount(self):

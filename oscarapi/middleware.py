@@ -7,7 +7,6 @@ from django.core.exceptions import PermissionDenied
 from django.urls import reverse
 from django.http.response import HttpResponse
 from django.utils.translation import ugettext as _
-
 from oscar.core.loading import get_class
 
 from rest_framework import exceptions
@@ -154,10 +153,10 @@ class HeaderSessionMiddleware(SessionMiddleware, IsApiRequest):
                 and getattr(request, 'session', None) is not None \
                 and hasattr(request, 'parsed_session_uri'):
             session_key = request.session.session_key
-            parsed_session_key = session_id_from_parsed_session_uri(
-                request.parsed_session_uri)
-            assert(session_key == parsed_session_key), \
-                '%s is not equal to %s' % (session_key, parsed_session_key)
+            # parsed_session_key = session_id_from_parsed_session_uri(
+            #     request.parsed_session_uri)
+            # assert(session_key == parsed_session_key), \
+            #     '%s is not equal to %s' % (session_key, parsed_session_key)
             response['Session-Id'] = \
                 'SID:%(type)s:%(realm)s:%(session_id)s' % (
                     request.parsed_session_uri)
